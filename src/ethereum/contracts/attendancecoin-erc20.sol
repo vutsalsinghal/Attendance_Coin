@@ -4,7 +4,7 @@ pragma solidity ^0.4.24;
 // ----------------------------------------------------------------------------
 // 1B FIXED Supply Token contract
 //
-// Symbol      : AC
+// Symbol      : ATNC
 // Name        : Attendance Coin
 // Total supply: 1,000,000,000.000000000000000000
 // Decimals    : 18
