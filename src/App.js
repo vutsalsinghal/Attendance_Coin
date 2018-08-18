@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {Button, Icon, Modal, Card, Grid} from 'semantic-ui-react';
 import Layout from './components/layout';
 import CheckBalanceForm from './components/checkBalance';
-import CheckMetadata from './components/checkMetadata';
 import AttendanceCoin from './ethereum/attendancecoin';
 import web3 from './ethereum/web3';
 
@@ -44,41 +43,25 @@ class App extends Component {
 	render() {
 		return (
 			<Layout>
-				<h1>Coin Index!</h1>
+				<h1>Attendance Coin Holders:</h1>
 				
 				<Grid>
 					<Grid.Column width={12}>
 						{this.renderUsers()}
 					</Grid.Column>
 					<Grid.Column width={4}>
-						<Grid.Row>
-							<Modal
-								trigger={
-									<Button icon labelPosition='left' className="primary" floated="right">
-										<Icon name='check square outline' />
-										Check Balance
-									</Button>
-								}>
-								<Modal.Header>Check Balance</Modal.Header>
-								<Modal.Content>
-									<CheckBalanceForm />
-								</Modal.Content>
-							</Modal>
-						</Grid.Row>
-						<Grid.Row>
-							<Modal
-								trigger={
-									<Button icon labelPosition='left' className="primary" floated="right" style={{marginTop:"5px"}}>
-										<Icon name='check square outline' />
-										Check Metadata
-									</Button>
-								}>
-								<Modal.Header>Attendance Coin Meatdata</Modal.Header>
-								<Modal.Content>
-									<CheckMetadata />
-								</Modal.Content>
-							</Modal>
-						</Grid.Row>
+						<Modal
+							trigger={
+								<Button icon labelPosition='left' className="primary" floated="right">
+									<Icon name='check square outline' />
+									Check Balance
+								</Button>
+							}>
+							<Modal.Header>Check Balance</Modal.Header>
+							<Modal.Content>
+								<CheckBalanceForm />
+							</Modal.Content>
+						</Modal>
 					</Grid.Column>
 				</Grid>
 			</Layout>
