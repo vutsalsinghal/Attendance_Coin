@@ -22,7 +22,6 @@ class CheckBalanceForm extends Component{
 			this.setState({errorMessage:err.message});
 		}
 
-
 		this.setState({value:''});
 	};
 

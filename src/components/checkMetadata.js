@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Message} from 'semantic-ui-react';
+import {Card} from 'semantic-ui-react';
 import AttendanceCoin from '../ethereum/attendancecoin';
 import web3 from '../ethereum/web3';
 
@@ -9,7 +9,6 @@ class CheckMetadata extends Component{
 		symbol:'',
 		totalSupply:'',
 		owner:'',
-		message:'',
 	}
 
 	async componentDidMount(){
@@ -21,43 +20,50 @@ class CheckMetadata extends Component{
 
 		this.setState({name, owner, symbol, totalSupply});
 	}
-	
-	onClick = async (para) => {
-		let msg;
 
-		if (para === 'name'){
-			msg = <Message header="Name" content={this.state.name} />;
-		}else if(para === 'owner'){
-			msg = <Message header="Owner Address" content={this.state.owner} />;
-		}else if(para === 'symbol'){
-			msg = <Message header="Symbol" content={this.state.symbol} />;
-		}else if(para === 'totalSupply'){
-			msg = <Message header="Total Supply" content={this.state.totalSupply} />;
-		}
-		this.setState({message:msg});
-	};
+	renderCards(){
+		const repo = 'https://github.com/vutsalsinghal/Attendance_Coin';
+
+		const metaCards = [
+			{
+				header:this.state.name,
+				meta: 'Name Of The Coin',
+				description: 'The full-name of the coin',
+				style: { overflowWrap: 'break-word' }
+			},
+			{
+				header:this.state.symbol,
+				meta: 'Symbol Of The Coin',
+				description: 'Identifying acronym of the coin',
+				style: { overflowWrap: 'break-word' }
+			},
+			{
+				header:this.state.totalSupply,
+				meta: 'Initial Total Fixed Supply',
+				description: 'No. of coins mined at the time of contract creation',
+				style: { overflowWrap: 'break-word' }
+			},
+			{
+				header:this.state.owner,
+				meta: 'Owner of the Attendance Coin Contract',
+				description: 'Contract creator address',
+				style: { overflowWrap: 'break-word' }
+			},
+			{
+				href:repo,
+				header: repo,
+				meta: 'Code Repository Of The Coin',
+				description: 'Repository contains both contract and application code',
+				style: { overflowWrap: 'break-word' },
+				color:"blue"
+			}
+		];
+
+		return <Card.Group items={metaCards} />
+	}
 
 	render(){
-		return (
-			<div>
-				<Button primary basic onClick={para => this.onClick('name')}>
-					Coin Name
-				</Button>
-
-				<Button primary basic onClick={para => this.onClick('owner')}>
-					Coin Owner
-				</Button>
-
-				<Button primary basic onClick={para => this.onClick('symbol')}>
-					Coin Symbol
-				</Button>
-
-				<Button primary basic onClick={para => this.onClick('totalSupply')}>
-					Total Coin Supply
-				</Button>
-				{this.state.message}
-			</div>
-		);
+		return <div>{this.renderCards()}</div>;
 	}
 };
 
