@@ -9,6 +9,7 @@ class CheckMetadata extends Component{
 		address:'',
 		token_amt:'',
 		loading:false,
+		msg:''
 	}
 
 	onSubmit = async event => {
@@ -18,7 +19,10 @@ class CheckMetadata extends Component{
 		
 		try{
 			const accounts = await web3.eth.getAccounts();
-			await AttendanceCoin.methods.transfer(this.state.address, this.state.token_amt).send({from:accounts[0]});
+			const res = await AttendanceCoin.methods.transfer(this.state.address, this.state.token_amt).send({from:accounts[0]});
+			if (res["status"]){
+				this.setState({msg:<Message floating positive header="Success!" content={"Transfered " + this.state.token_amt + ' ATNC coins successfully.'} />});
+			}
 		}catch(err){
 			this.setState({errorMessage:err.message});
 		}
@@ -49,6 +53,7 @@ class CheckMetadata extends Component{
 				<Button primary basic loading={this.state.loading} disabled={this.state.loading	}>
 					Transfer
 				</Button>
+				{this.state.msg}
 			</Form>
 		);
 	}

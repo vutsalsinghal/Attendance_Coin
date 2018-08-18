@@ -9,7 +9,7 @@ export default () => {
 	      	<Menu.Item>Attendance Coin</Menu.Item>
 
 	       	<Menu.Menu position="right">
-	       		<Modal trigger={<Menu.Item>Meta Data</Menu.Item>}>
+	       		<Modal trigger={<Menu.Item>Metadata</Menu.Item>}>
 					<Modal.Header>Attendance Coin Meatdata</Modal.Header>
 					<Modal.Content>
 						<CheckMetadata />

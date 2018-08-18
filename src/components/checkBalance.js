@@ -31,9 +31,9 @@ class CheckBalanceForm extends Component{
 		if (this.state.balance === ''){
 			balanceMessage = null;
 		}else if (this.state.balance === '0'){
-			balanceMessage = <Message floating negative header="Balance" content={"You've 0 AC coins!"} />;
+			balanceMessage = <Message floating negative header="Balance" content={"You've 0 ATNC coins!"} />;
 		}else{
-			balanceMessage = <Message floating positive header="Balance" content={"You've " + this.state.balance + ' AC coins!'} />;
+			balanceMessage = <Message floating positive header="Balance" content={"You've " + this.state.balance + ' ATNC coins!'} />;
 		}
 
 		return (

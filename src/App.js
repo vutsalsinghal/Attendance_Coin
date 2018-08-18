@@ -33,7 +33,8 @@ class App extends Component {
 			return {
 				header: "Address: " + user[0],
 				description: "Balance: " + user[1] + " ATNC",
-				fluid: true
+				fluid: true,
+				style: { overflowWrap: 'break-word' }
 			};
 		});
 
@@ -45,7 +46,7 @@ class App extends Component {
 			<Layout>
 				<h1>Attendance Coin Holders:</h1>
 				
-				<Grid>
+				<Grid stackable reversed="mobile">
 					<Grid.Column width={12}>
 						{this.renderUsers()}
 					</Grid.Column>
