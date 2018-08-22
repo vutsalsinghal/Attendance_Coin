@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Form, Input, Button, Message} from 'semantic-ui-react';
-import AttendanceCoin from '../ethereum/attendancecoin';
+import * as ACinstances from '../ethereum/attendancecoin';
 import web3 from '../ethereum/web3';
 
 class CheckBalanceForm extends Component{
@@ -16,7 +16,7 @@ class CheckBalanceForm extends Component{
 		this.setState({errorMessage:''});		
 		
 		try{
-			const balance = await AttendanceCoin.methods.balanceOf(this.state.value).call();
+			const balance = await ACinstances.AttendanceCoin.methods.balanceOf(this.state.value).call();
 			this.setState({balance:web3.utils.fromWei(balance, 'ether')});
 		}catch(err){
 			this.setState({errorMessage:err.message});

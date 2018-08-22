@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Card} from 'semantic-ui-react';
-import AttendanceCoin from '../ethereum/attendancecoin';
+import * as ACinstances from '../ethereum/attendancecoin';
 import web3 from '../ethereum/web3';
 
 class CheckMetadata extends Component{
@@ -12,10 +12,10 @@ class CheckMetadata extends Component{
 	}
 
 	async componentDidMount(){
-		const name = await AttendanceCoin.methods.name().call();
-		const owner = await AttendanceCoin.methods.owner().call();
-		const symbol = await AttendanceCoin.methods.symbol().call();
-		let totalSupply = await AttendanceCoin.methods.totalSupply().call();
+		const name = await ACinstances.AttendanceCoin.methods.name().call();
+		const owner = await ACinstances.AttendanceCoin.methods.owner().call();
+		const symbol = await ACinstances.AttendanceCoin.methods.symbol().call();
+		let totalSupply = await ACinstances.AttendanceCoin.methods.totalSupply().call();
 		totalSupply = web3.utils.fromWei(totalSupply, 'ether');
 
 		this.setState({name, owner, symbol, totalSupply});

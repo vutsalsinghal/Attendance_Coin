@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {Button, Icon, Modal, Card, Grid} from 'semantic-ui-react';
 import Layout from './components/layout';
-import CheckBalanceForm from './components/checkBalance';
-import AttendanceCoin from './ethereum/attendancecoin';
 import web3 from './ethereum/web3';
+import CheckBalanceForm from './components/checkBalance';
+import ACFaucet from './components/ACFaucet';
+import * as ACinstances from './ethereum/attendancecoin';
 
 class App extends Component {
 	state = {
@@ -15,14 +16,14 @@ class App extends Component {
 		let users = [];
 		let userAddr, userBal;
 
-		const lastId = await AttendanceCoin.methods.lastID().call();
+		const lastId = await ACinstances.AttendanceCoin_lastID.methods.lastID().call();
 		this.setState({lastId:lastId});
 
-		for (var i=2; i < parseInt(this.state.lastId,10)+1; i++){
-			userAddr = await AttendanceCoin.methods.idToAddress(i).call();
-			userBal = await AttendanceCoin.methods.balanceOf(userAddr).call();
-			
-			users.push([userAddr,web3.utils.fromWei(userBal,'ether')]);
+		for (var i=1; i < parseInt(this.state.lastId,10)+1; i++){
+			userAddr = await ACinstances.AttendanceCoin_lastID.methods.addresses(i).call();
+			userBal = await ACinstances.AttendanceCoin.methods.balanceOf(userAddr).call();
+
+			users.push([userAddr,web3.utils.fromWei(userBal, 'ether')]);
 		}
 
 		this.setState({users:users.sort(function(a,b){return a[1] - b[1];}).reverse()});
@@ -34,7 +35,7 @@ class App extends Component {
 				header: "Address: " + user[0],
 				description: "Balance: " + user[1] + " ATNC",
 				fluid: true,
-				style: { overflowWrap: 'break-word' }
+				style: { overflowWrap: 'break-word' },
 			};
 		});
 
@@ -51,18 +52,34 @@ class App extends Component {
 						{this.renderUsers()}
 					</Grid.Column>
 					<Grid.Column width={4}>
-						<Modal
-							trigger={
-								<Button icon labelPosition='left' className="primary" floated="right">
-									<Icon name='check square outline' />
-									Check Balance
-								</Button>
-							}>
-							<Modal.Header>Check Balance</Modal.Header>
-							<Modal.Content>
-								<CheckBalanceForm />
-							</Modal.Content>
-						</Modal>
+						<Grid.Row>
+							<Modal
+								trigger={
+									<Button icon labelPosition='left' className="primary" floated="right">
+										<Icon name='check square outline' />
+										AC Faucet
+									</Button>
+								}>
+								<Modal.Header>Check Balance</Modal.Header>
+								<Modal.Content>
+									<ACFaucet />
+								</Modal.Content>
+							</Modal>
+						</Grid.Row>
+						<Grid.Row>
+							<Modal
+								trigger={
+									<Button icon labelPosition='left' className="primary" floated="right" style={{marginTop:"5px"}}>
+										<Icon name='check square outline' />
+										Check Balance
+									</Button>
+								}>
+								<Modal.Header>Check Balance</Modal.Header>
+								<Modal.Content>
+									<CheckBalanceForm />
+								</Modal.Content>
+							</Modal>
+						</Grid.Row>
 					</Grid.Column>
 				</Grid>
 			</Layout>

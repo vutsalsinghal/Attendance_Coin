@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Input, Message, Button, Form} from 'semantic-ui-react';
-import AttendanceCoin from '../ethereum/attendancecoin';
+import * as ACinstance from '../ethereum/attendancecoin';
 import web3 from '../ethereum/web3';
 
 class CheckMetadata extends Component{
@@ -19,7 +19,7 @@ class CheckMetadata extends Component{
 		
 		try{
 			const accounts = await web3.eth.getAccounts();
-			const res = await AttendanceCoin.methods.transfer(this.state.address, this.state.token_amt).send({from:accounts[0]});
+			const res = await ACinstance.AttendanceCoin.methods.transfer(this.state.address, this.state.token_amt).send({from:accounts[0]});
 			if (res["status"]){
 				this.setState({msg:<Message floating positive header="Success!" content={"Transfered " + this.state.token_amt + ' ATNC coins successfully.'} />});
 			}
