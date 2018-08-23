@@ -23,7 +23,9 @@ class App extends Component {
 			userAddr = await ACinstances.AttendanceCoin_lastID.methods.addresses(i).call();
 			userBal = await ACinstances.AttendanceCoin.methods.balanceOf(userAddr).call();
 
-			users.push([userAddr,web3.utils.fromWei(userBal, 'ether')]);
+			if (userBal !== '0'){
+				users.push([userAddr,web3.utils.fromWei(userBal, 'ether')]);
+			}
 		}
 
 		this.setState({users:users.sort(function(a,b){return a[1] - b[1];}).reverse()});
@@ -53,14 +55,14 @@ class App extends Component {
 					</Grid.Column>
 					<Grid.Column width={4}>
 						<Grid.Row>
-							<Modal
+							<Modal basic size='small'
 								trigger={
 									<Button icon labelPosition='left' className="primary" floated="right">
-										<Icon name='check square outline' />
+										<Icon name='rain' />
 										AC Faucet
 									</Button>
 								}>
-								<Modal.Header>Check Balance</Modal.Header>
+								<Modal.Header>Get Attendance Coins</Modal.Header>
 								<Modal.Content>
 									<ACFaucet />
 								</Modal.Content>

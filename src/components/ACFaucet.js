@@ -35,14 +35,67 @@ class ACFaucet extends Component{
 		this.setState({loading:false});
 	};
 
+	onClickAddAddress = async event => {
+		this.setState({errorMessage:'', loading:true, msg:''});
+
+		try{
+			const accounts = await web3.eth.getAccounts();
+			await ACinstances.AttendanceCoin_lastID.methods.enter().send({from:accounts[0]});
+
+			this.setState({msg:<Message positive header="Address Added!" content={accounts[0] + ' Added successfully to the list!'} />});
+		}catch(err){
+			this.setState({errorMessage:<Message error header="Oops!" content={err.message} />});	
+		}
+
+		this.setState({loading:false});
+	}
+
+	onClickRemoveAddress = async event => {
+		this.setState({errorMessage:'', loading:true, msg:''});
+
+		try{
+			const accounts = await web3.eth.getAccounts();
+			await ACinstances.AttendanceCoin_lastID.methods.exit().send({from:accounts[0]});
+
+			this.setState({msg:<Message positive header="Address Removed!" content={accounts[0] + ' Removed successfully from the list!'} />});
+		}catch(err){
+			this.setState({errorMessage:<Message error header="Oops!" content={err.message} />});	
+		}
+
+		this.setState({loading:false});
+	}
+
 	render(){
 		return (
 			<div>
-				<Button primary basic style={{marginBottom:"15px"}} onClick={this.onClick} disabled={this.state.loading} loading={this.state.loading}>
-					Get 8 AC
+				<Button primary style={{marginBottom:"15px"}} onClick={this.onClick} disabled={this.state.loading} loading={this.state.loading}>
+					Get 8 Attendance Coins
 				</Button>
-				{this.state.errorMessage}
+				
+				<Message info>
+				    <Message.Header>
+				    	If your address is not displyed in the "Coin Holders" list
+					    <Button primary floated="right" onClick={this.onClickAddAddress} disabled={this.state.loading} loading={this.state.loading}>
+							Add Address
+						</Button>
+					</Message.Header>
+					<br/>
+				</Message>
+
+				{/*
+				<Message info>
+				    <Message.Header>
+				    	If you want to remove your address from the "Coin Holders" list
+					    <Button primary floated="right" onClick={this.onClickRemoveAddress} disabled={this.state.loading} loading={this.state.loading}>
+							Remove Address
+						</Button>
+					</Message.Header>
+					<br/>
+				</Message>
+				*/}
+
 				{this.state.msg}
+				{this.state.errorMessage}
 			</div>
 		);
 	}
