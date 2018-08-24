@@ -291,7 +291,7 @@ contract AttendanceCoin_Faucet{
             success = false;
         }else{
             ++count[msg.sender];
-            success = tokenAddress.approve(msg.sender, 8000000000000000000);
+            success = tokenAddress.transfer(msg.sender, 8000000000000000000);
         }
     }
 
