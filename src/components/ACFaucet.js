@@ -26,9 +26,9 @@ class ACFaucet extends Component{
                 var seconds = "0" + date.getSeconds();
                 var formattedTime = hours + ' hours ' + minutes.substr(-2) + ' minutes and ' + seconds.substr(-2) + ' seconds!';
 
-                this.setState({msg:<Message floating negative header="User is greedy!" content={accounts[0] + ' has already received 40 AC. Please wait ' + formattedTime} />});
+                this.setState({msg:<Message floating negative header="User is greedy!" content={accounts[0] + ' has already received 50 AC. Please wait ' + formattedTime} />});
             }else{
-                this.setState({msg:<Message floating positive header="Success!" content={"Transfered " + accounts[0] + ' 8 AC successfully.'} />});
+                this.setState({msg:<Message floating positive header="Success!" content={"Transfered " + accounts[0] + ' 10 AC successfully.'} />});
                 //await ACinstances.AttendanceCoin.methods.transferFrom("0xbec1ad77ab0dca72224f47bb94ee64a610045c79", accounts[0], 8000000000000000000).send({from: accounts[0]});
                 //this.setState({msg:<Message floating positive header="Success!" content={"Transfered 8AC to " + accounts[0] + ' successfully.'} />});
             }
@@ -73,7 +73,7 @@ class ACFaucet extends Component{
         return (
             <div>
                 <Button primary style={{marginBottom:"15px"}} onClick={this.onClick} disabled={this.state.loading} loading={this.state.loading}>
-                    Get 8 Attendance Coins
+                    Get 10 Attendance Coins
                 </Button>
                 
                 <Message info>
