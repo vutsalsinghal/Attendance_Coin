@@ -17,22 +17,20 @@ class ACFaucet extends Component{
             const accounts = await web3.eth.getAccounts();
             await ACinstances.AttendanceCoin_Faucet.methods.getAC().send({from: accounts[0]});
             const count = await ACinstances.AttendanceCoin_Faucet.methods.count(accounts[0]).call();
-            console.log(count);
             if (count > 5){
-                console.log('cooldown!');
                 const timeLeft = await ACinstances.AttendanceCoin_Faucet.methods.timeLeft().call({from:accounts[0]});
                 
                 var date = new Date(timeLeft*1000);
                 var hours = date.getHours();
                 var minutes = "0" + date.getMinutes();
                 var seconds = "0" + date.getSeconds();
-                var formattedTime = hours + ' hours ' + minutes.substr(-2) + ' minutes and ' + seconds.substr(-2) + 'seconds!';
+                var formattedTime = hours + ' hours ' + minutes.substr(-2) + ' minutes and ' + seconds.substr(-2) + ' seconds!';
 
                 this.setState({msg:<Message floating negative header="User is greedy!" content={accounts[0] + ' has already received 40 AC. Please wait ' + formattedTime} />});
             }else{
-                this.setState({msg:<Message floating positive header="Success!" content={"Approved " + accounts[0] + ' 8 AC successfully. You will now be prompted to transfer AC to your account.'} />});
-                await ACinstances.AttendanceCoin.methods.transferFrom("0xbec1ad77ab0dca72224f47bb94ee64a610045c79", accounts[0], 8000000000000000000).send({from: accounts[0]});
-                this.setState({msg:<Message floating positive header="Success!" content={"Transfered 8AC to " + accounts[0] + ' successfully.'} />});
+                this.setState({msg:<Message floating positive header="Success!" content={"Transfered " + accounts[0] + ' 8 AC successfully.'} />});
+                //await ACinstances.AttendanceCoin.methods.transferFrom("0xbec1ad77ab0dca72224f47bb94ee64a610045c79", accounts[0], 8000000000000000000).send({from: accounts[0]});
+                //this.setState({msg:<Message floating positive header="Success!" content={"Transfered 8AC to " + accounts[0] + ' successfully.'} />});
             }
         }catch(err){
             this.setState({errorMessage:<Message error header="Oops!" content={err.message} />});
