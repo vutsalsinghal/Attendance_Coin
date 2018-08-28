@@ -43,7 +43,7 @@ class CheckMetadata extends Component{
 				<Form.Field>
 					<label>Enter Token Amount</label>
 					<Input
-					label='ATNC'
+					label='AC'
 					labelPosition="right"
 					value={this.state.value}
 					onChange={amt => this.setState({token_amt:amt.target.value})}

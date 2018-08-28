@@ -2,13 +2,16 @@ import React from 'react';
 import { Menu, Modal } from 'semantic-ui-react';
 import CheckMetadata from './checkMetadata';
 import TransferCoin from './transferCoin';
+import {Link} from 'react-router-dom';
 
 export default () => {
 	return (
 	    <Menu style={{ marginTop:'10px' }}>
-	      	<Menu.Item>Attendance Coin</Menu.Item>
+	      	<Menu.Item><Link to='/'>Attendance Coin</Link></Menu.Item>
 
 	       	<Menu.Menu position="right">
+	       		<Menu.Item><Link to='/checkBalance'>Check Balance</Link></Menu.Item>
+
 	       		<Modal trigger={<Menu.Item>Metadata</Menu.Item>}>
 					<Modal.Header>Attendance Coin Meatdata</Modal.Header>
 					<Modal.Content>
