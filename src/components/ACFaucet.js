@@ -37,7 +37,7 @@ class ACFaucet extends Component{
         }
 
         this.setState({loading:false});
-    };
+    }
 
     onClickAddAddress = async event => {
         this.setState({errorMessage:'', loading:true, msg:''});
@@ -71,11 +71,7 @@ class ACFaucet extends Component{
 
     render(){
         return (
-            <div>
-                <Button primary style={{marginBottom:"15px"}} onClick={this.onClick} disabled={this.state.loading} loading={this.state.loading}>
-                    Get 10 Attendance Coins
-                </Button>
-                
+            <div>               
                 <Message info>
                     <Message.Header>
                         If your address is not displyed in the "Coin Holders" list
@@ -85,6 +81,10 @@ class ACFaucet extends Component{
                     </Message.Header>
                     <br/>
                 </Message>
+
+                <Button primary style={{marginBottom:"15px"}} onClick={this.onClick} disabled={this.state.loading} loading={this.state.loading}>
+                    Get 10 Attendance Coins
+                </Button>
 
                 {/*
                 <Message info>

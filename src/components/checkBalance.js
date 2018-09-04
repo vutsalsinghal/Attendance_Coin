@@ -48,7 +48,7 @@ class CheckBalanceForm extends Component{
 				/>
 				</Form.Field>
 				<Message error header="Oops!" content={this.state.errorMessage} />
-				<Button primary basic>
+				<Button primary>
 					Shoot
 				</Button>
 				{balanceMessage}

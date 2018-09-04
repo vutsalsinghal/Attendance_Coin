@@ -10,7 +10,7 @@ export default () => {
 	      	<Menu.Item><Link to='/'>Attendance Coin</Link></Menu.Item>
 
 	       	<Menu.Menu position="right">
-	       		<Menu.Item><Link to='/checkBalance'>Check Balance</Link></Menu.Item>
+	       		<Menu.Item><Link to='/faucet'>Faucet</Link></Menu.Item>
 
 	       		<Modal trigger={<Menu.Item>Metadata</Menu.Item>}>
 					<Modal.Header>Attendance Coin Meatdata</Modal.Header>

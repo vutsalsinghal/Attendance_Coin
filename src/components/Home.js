@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Button, Icon, Modal, Card, Grid} from 'semantic-ui-react';
-import ACFaucet from './ACFaucet';
+import CheckBalanceForm from './checkBalance';
 import * as ACinstances from '../ethereum/attendancecoin';
 import web3 from '../ethereum/web3';
 
@@ -56,12 +56,12 @@ class Home extends Component {
 								trigger={
 									<Button icon labelPosition='left' className="primary" floated="right">
 										<Icon name='rain' />
-										AC Faucet
+										Check Balance
 									</Button>
 								}>
-								<Modal.Header>Get Attendance Coins</Modal.Header>
+								<Modal.Header>Check Attendance Coins</Modal.Header>
 								<Modal.Content>
-									<ACFaucet />
+									<CheckBalanceForm />
 								</Modal.Content>
 							</Modal>
 						</Grid.Row>
