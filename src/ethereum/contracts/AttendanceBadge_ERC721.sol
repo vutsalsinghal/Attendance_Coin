@@ -1,5 +1,7 @@
 pragma solidity ^0.4.24;
 
+// Deployed on Rinkey network at 0x05023b3df1c9088b7431dce589f91a63d5b43599
+
 import './libraries/SafeMath.sol';
 import './utility/CheckERC165.sol';
 import './standard/ERC721.sol';
@@ -50,9 +52,8 @@ contract AttendanceBadge is ERC721, CheckERC165, Owned{
         }
     }
     
-    function issueTokens(uint256 _extraTokens) public{ 
+    function issueTokens(uint256 _extraTokens) public onlyOwner{ 
         // Make sure only the contract creator can call this
-        require(msg.sender == owner);
         balances[msg.sender] = balances[msg.sender].add(_extraTokens);
     
         //We have to emit an event for each token that gets created
@@ -60,14 +61,12 @@ contract AttendanceBadge is ERC721, CheckERC165, Owned{
             emit Transfer(0x0, owner, i);
         }
     
-        maxId += _extraTokens; //<- SafeMath for this operation 
-        // was done in for loop above
+        maxId += _extraTokens;                                                  //<- SafeMath for this operation was done in for loop above
     }
     
     function burnToken(uint256 _tokenId) external{
         address tokenOwner = ownerOf(_tokenId);
-        require (tokenOwner == msg.sender || allowance[_tokenId] == msg.sender || authorised[tokenOwner][msg.sender]
-        );
+        require (tokenOwner == msg.sender || allowance[_tokenId] == msg.sender || authorised[tokenOwner][msg.sender]);
         burned[_tokenId] = true;
         balances[tokenOwner]--;
         emit Transfer(tokenOwner, 0x0, _tokenId);
@@ -117,6 +116,7 @@ contract AttendanceBadge is ERC721, CheckERC165, Owned{
         assembly {
             size := extcodesize(_to)
         }
+        
         if(size > 0){
             ERC721TokenReceiver receiver = ERC721TokenReceiver(_to);
             require(receiver.onERC721Received(msg.sender,_from,_tokenId,data) == bytes4(keccak256("onERC721Received(address,address,uint256,bytes)")));

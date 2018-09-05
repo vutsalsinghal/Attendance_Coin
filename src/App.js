@@ -10,8 +10,8 @@ class App extends Component {
 			<BrowserRouter>
 				<Layout>
 					<Switch>
-						<Route exact path="/" component={Home} />
-						<Route path="/faucet" component={ACFaucet} />
+						<Route exact path="/attendancecoin" component={Home} />
+						<Route path="/attendancecoin/faucet" component={ACFaucet} />
 					</Switch>
 				</Layout>
 			</BrowserRouter>
