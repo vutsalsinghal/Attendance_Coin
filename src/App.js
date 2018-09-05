@@ -5,18 +5,18 @@ import Home from './components/Home';
 import ACFaucet from './components/ACFaucet';
 
 class App extends Component {
-	render() {
-		return (
-			<BrowserRouter>
-				<Layout>
-					<Switch>
-						<Route exact path="/Attendance_Coin" component={Home} />
-						<Route path="/Attendance_Coin/faucet" component={ACFaucet} />
-					</Switch>
-				</Layout>
-			</BrowserRouter>
-		);
-	}
+  render() {
+    return (
+      <BrowserRouter>
+        <Layout>
+          <Switch>
+            <Route exact path="/Attendance_Coin" component={Home} />
+            <Route path="/Attendance_Coin/faucet" component={ACFaucet} />
+          </Switch>
+        </Layout>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;

@@ -7,10 +7,10 @@ import {Link} from 'react-router-dom';
 export default () => {
   return (
     <Menu style={{ marginTop:'10px' }}>
-      <Menu.Item><Link to='/'>Attendance Coin</Link></Menu.Item>
+      <Menu.Item><Link to='/Attendance_Coin'>Attendance Coin</Link></Menu.Item>
 
       <Menu.Menu position="right">
-        <Menu.Item><Link to='/faucet'><Icon name='rain' />Faucet</Link></Menu.Item>
+        <Menu.Item><Link to='/Attendance_Coin/faucet'><Icon name='rain' />Faucet</Link></Menu.Item>
 
         <Modal trigger={<Menu.Item>Metadata</Menu.Item>}>
           <Modal.Header>Attendance Coin Meatdata</Modal.Header>
